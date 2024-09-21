@@ -21,24 +21,22 @@ const Login = ({setIsAuthenticated}) => {
         },
       });
   
-      console.log('API URL:', process.env.REACT_APP_API_URL);
-  
-      // Ensure token is in the response
+      // Ensure role is in the response
       if (res.data && res.data.token) {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('role', res.data.role); // Store the user role
         setIsAuthenticated(true);
         navigate('/dashboard');
-        console.log(res.data); // Handle success response
       } else {
-        console.error('Token missing in response');
+        console.error('Token or role missing in response');
       }
     } catch (err) {
       if (err.response && err.response.data) {
         console.error(err.response.data);
-        setError('Invalid credentials'); // Handle error response
+        setError('Invalid credentials');
       } else {
         console.error('An unknown error occurred:', err.message);
-        setError('An error occurred. Please try again.'); // Handle generic error response
+        setError('An error occurred. Please try again.');
       }
     }
   };

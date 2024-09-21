@@ -11,28 +11,30 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem('token'); // Check if token exists
+    const role = localStorage.getItem('role'); // Get the user role
     if (token) {
       setIsAuthenticated(true);
     }
   }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('token'); // Remove token on logout
-    setIsAuthenticated(false);        // Update authentication state
+    localStorage.removeItem('role'); // Remove role on logout
+    setIsAuthenticated(false);
   };
+
   return (
     <Router>
-     {isAuthenticated && <Header onLogout={handleLogout} />}
-      <div>
-  
-        <Routes>
-          
+    {isAuthenticated && <Header onLogout={handleLogout} />}
+    <div>
+      <Routes>
         <Route path="/" element={<Register />} />
         <Route
           path="/login"
           element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/dashboard" />}
         />
-          <Route path="/register" element={<Register />} />
-          <Route
+        <Route path="/register" element={<Register />} />
+        <Route
           path="/dashboard"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
@@ -40,10 +42,9 @@ const App = () => {
             </PrivateRoute>
           }
         />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
+      </Routes>
+    </div>
+  </Router>
   );
 };
 
