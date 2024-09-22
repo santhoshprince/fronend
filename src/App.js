@@ -5,6 +5,7 @@ import Header from "./components/header"
 import Login from './components/login';
 import Dashboard from './components/dashboard'
 import PrivateRoute from './components/privateroute';
+import ProductList from './components/productlist';
 import './global.css';  
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Register />} />
+        <Route path="/ProductList" element={<ProductList />} />
         <Route
           path="/login"
           element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/dashboard" />}
@@ -39,9 +41,11 @@ const App = () => {
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <Dashboard />
+              
             </PrivateRoute>
           }
         />
+     
       </Routes>
     </div>
   </Router>

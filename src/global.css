@@ -208,3 +208,8 @@
 .message.error {
   color: red; /* Change color for error message */
 }
+
+.new-list{
+  display: flex;
+  justify-content: space-between;
+}

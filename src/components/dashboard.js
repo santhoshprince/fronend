@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ProductList from '../components/productlist'; 
 
 const Dashboard = () => {
   const [role, setRole] = useState('');
@@ -33,6 +34,7 @@ const Dashboard = () => {
       ) : (
         <h2>Unauthorized</h2>
       )}
+       <ProductList /> 
     </div>
   );
 };
